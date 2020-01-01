@@ -1,0 +1,74 @@
+﻿@model Identity.Models.RoleEditModel
+@{
+    ViewBag.Title = "Edit";
+}
+
+@using (Html.BeginForm())
+{
+    <input type="hidden" name="roleName" value="@Model.Role.Name" />
+    <input type="hidden" name="roleId" value="@Model.Role.Id" />
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            Add to @Model.Role.Name
+        </div>
+        <table class="table table-striped">
+            @if (Model.NoNmembers.Count() == 0)
+            {
+                <tr><td colspan="2">Bu role eklenebilecek kullanıcı yok.</td></tr>
+            }
+            else
+            {
+                <tr>
+                    <td>
+                        User Id
+                    </td>
+                    <td>
+                        Role
+                    </td>
+                </tr>
+                foreach (var item in Model.NoNmembers)
+                {
+                    <tr>
+                        <td>@item.UserName</td>
+                        <td><input type="checkbox" name="IdsToAdd" value="@item.Id" /></td>
+                    </tr>
+
+                }
+            }
+        </table>
+    </div>
+
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            Remove from @Model.Role.Name
+        </div>
+        <table class="table table-striped">
+            @if (Model.members.Count() == 0)
+            {
+                <tr><td colspan="2">Bu role eklenmiş bir kullanıcı yok.</td></tr>
+            }
+            else
+            {
+                <tr>
+                    <td>
+                        User Id
+                    </td>
+                    <td>
+                        Role
+                    </td>
+                </tr>
+                foreach (var item in Model.members)
+                {
+                    <tr>
+                        <td>@item.UserName</td>
+                        <td><input type="checkbox" name="IdsToDelete" value="@item.Id" /></td>
+                    </tr>
+
+                }
+            }
+        </table>
+    </div>
+
+    <button type="submit" class="btn btn-success">Kaydet</button>
+}
+

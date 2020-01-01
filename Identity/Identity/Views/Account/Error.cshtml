@@ -1,0 +1,14 @@
+﻿@model string[]
+@{
+    ViewBag.Title = "Error";
+}
+
+<div class="alert alert-danger">
+
+    @foreach (var item in Model)
+    {
+        <p>@item</p>
+    }
+
+</div>
+
